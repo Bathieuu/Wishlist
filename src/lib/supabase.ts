@@ -24,6 +24,7 @@ export interface WishlistItem {
   image_url: string | null;
   price_cents: number | null;
   currency: string | null;
+  price: string | null;  // Prix en format texte
   created_at: string;
   updated_at: string;
   last_checked_at: string | null;

@@ -4,6 +4,30 @@ import type { WishlistItem, Item } from '@/lib/supabase';
 import ItemCard from '@/components/ItemCard';
 import { getDomainDisplayName } from '@/lib/domain';
 
+// Fonction pour extraire un prix numérique d'une chaîne de texte
+const extractPrice = (priceText: string | null): number => {
+  if (!priceText) return 0;
+  
+  // Nettoyer le texte et extraire les nombres
+  const cleanText = priceText.replace(/[^\d,.-]/g, '');
+  const match = cleanText.match(/[\d]+[,.]?[\d]*/);
+  
+  if (match) {
+    // Remplacer les virgules par des points pour la conversion
+    const numberStr = match[0].replace(',', '.');
+    return parseFloat(numberStr) || 0;
+  }
+  
+  return 0;
+};
+
+// Fonction pour calculer le total de la wishlist
+const calculateTotal = (items: WishlistItem[]): number => {
+  return items.reduce((total, item) => {
+    return total + extractPrice(item.price);
+  }, 0);
+};
+
 interface Filters {
   domain: string;
   sortBy: 'created_at' | 'updated_at' | 'price_cents' | 'title';
@@ -64,6 +88,7 @@ export default function Me() {
         image_url: item.image_url,
         price_cents: null, // On n'a pas de priceCents dans notre schema actuel
         currency: null,
+        price: item.price, // Ajouter le champ price
         created_at: item.created_at,
         updated_at: item.updated_at,
         last_checked_at: null,
@@ -269,17 +294,41 @@ export default function Me() {
           </a>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-          {items.map(item => (
-            <ItemCard
-              key={item.id}
-              item={item}
-              onRefresh={handleRefresh}
-              onDelete={handleDelete}
-              refreshing={refreshingItems.has(item.id)}
-            />
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            {items.map(item => (
+              <ItemCard
+                key={item.id}
+                item={item}
+                onRefresh={handleRefresh}
+                onDelete={handleDelete}
+                refreshing={refreshingItems.has(item.id)}
+              />
+            ))}
+          </div>
+          
+          {/* Total section */}
+          <div className="mt-8 border-t pt-6">
+            <div className="flex justify-between items-center bg-gray-50 rounded-lg p-6">
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900">
+                  Total de votre wishlist
+                </h3>
+                <p className="text-sm text-gray-600">
+                  {items.length} article{items.length > 1 ? 's' : ''} • Prix estimés uniquement
+                </p>
+              </div>
+              <div className="text-right">
+                <div className="text-2xl font-bold text-green-600">
+                  ~{calculateTotal(items).toFixed(2)} €
+                </div>
+                <p className="text-xs text-gray-500 mt-1">
+                  Calcul approximatif
+                </p>
+              </div>
+            </div>
+          </div>
+        </>
       )}
     </div>
   );

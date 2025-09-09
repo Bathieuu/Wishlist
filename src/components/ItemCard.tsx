@@ -51,9 +51,9 @@ export default function ItemCard({
         )}
         
         {/* Price overlay */}
-        {item.price_cents !== null && (
+        {item.price && (
           <div className="absolute top-2 right-2 bg-white/90 backdrop-blur-sm rounded px-2 py-1 text-sm font-semibold text-primary-600">
-            {formatPrice(item.price_cents, item.currency)}
+            {item.price}
           </div>
         )}
       </div>
