@@ -30,80 +30,53 @@ export default function Me() {
         throw new Error('You must be logged in');
       }
 
-      // En développement local, utiliser Supabase directement
-      const isDev = import.meta.env.DEV;
+      // Utiliser Supabase directement (plus simple et fiable)
+      console.log('📊 Chargement des articles depuis Supabase...');
       
-      if (isDev) {
-        // Requête Supabase directe en développement
-        let query = supabase
-          .from('items')
-          .select('*');
+      let query = supabase
+        .from('items')
+        .select('*');
 
-        // Appliquer les filtres
-        if (filters.domain) {
-          query = query.eq('domain', filters.domain);
-        }
-
-        // Appliquer le tri
-        query = query.order(filters.sortBy, { ascending: filters.sortOrder === 'asc' });
-
-        const { data, error: supabaseError } = await query;
-
-        if (supabaseError) {
-          throw new Error(supabaseError.message);
-        }
-
-        // Convertir le format Supabase vers le format WishlistItem attendu
-        const formattedItems: WishlistItem[] = (data || []).map(item => ({
-          id: item.id,
-          user_id: item.user_id,
-          url: item.url,
-          domain: item.domain || '',
-          title: item.title,
-          image_url: item.image_url,
-          price_cents: null, // On n'a pas de priceCents dans notre schema actuel
-          currency: null,
-          created_at: item.created_at,
-          updated_at: item.updated_at,
-          last_checked_at: null,
-          status: 'active' as const
-        }));
-
-        setItems(formattedItems);
-
-        // Extraire les domaines uniques pour le filtre
-        const uniqueDomains = Array.from(
-          new Set(formattedItems.map(item => item.domain).filter(Boolean))
-        ).sort();
-        setDomains(uniqueDomains);
-
-      } else {
-        // En production, utiliser les fonctions Netlify
-        const params = new URLSearchParams();
-        if (filters.domain) params.set('domain', filters.domain);
-        params.set('sort', filters.sortBy);
-        params.set('order', filters.sortOrder);
-
-        const response = await fetch(`/.netlify/functions/items?${params}`, {
-          headers: {
-            'Authorization': `Bearer ${session.access_token}`,
-          },
-        });
-
-        const data = await response.json();
-
-        if (!data.ok) {
-          throw new Error(data.errors?.join(', ') || 'Failed to load items');
-        }
-
-        setItems(data.data || []);
-
-        // Extraire les domaines uniques pour le filtre
-        const uniqueDomains = Array.from(
-          new Set((data.data as WishlistItem[] || []).map((item: WishlistItem) => item.domain))
-        ).sort();
-        setDomains(uniqueDomains);
+      // Appliquer les filtres
+      if (filters.domain) {
+        query = query.eq('domain', filters.domain);
       }
+
+      // Appliquer le tri
+      query = query.order(filters.sortBy, { ascending: filters.sortOrder === 'asc' });
+
+      const { data, error: supabaseError } = await query;
+
+      if (supabaseError) {
+        console.error('❌ Erreur Supabase:', supabaseError);
+        throw new Error(supabaseError.message);
+      }
+
+      console.log('✅ Articles chargés:', data?.length || 0, 'articles');
+
+      // Convertir le format Supabase vers le format WishlistItem attendu
+      const formattedItems: WishlistItem[] = (data || []).map(item => ({
+        id: item.id,
+        user_id: item.user_id,
+        url: item.url,
+        domain: item.domain || '',
+        title: item.title,
+        image_url: item.image_url,
+        price_cents: null, // On n'a pas de priceCents dans notre schema actuel
+        currency: null,
+        created_at: item.created_at,
+        updated_at: item.updated_at,
+        last_checked_at: null,
+        status: 'active' as const
+      }));
+
+      setItems(formattedItems);
+
+      // Extraire les domaines uniques pour le filtre
+      const uniqueDomains = Array.from(
+        new Set(formattedItems.map(item => item.domain).filter(Boolean))
+      ).sort();
+      setDomains(uniqueDomains);
 
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
@@ -169,23 +142,27 @@ export default function Me() {
         throw new Error('You must be logged in');
       }
 
-      const response = await fetch(`/.netlify/functions/items/${itemId}`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${session.access_token}`,
-        },
-      });
+      console.log('🗑️ Suppression de l\'article:', itemId);
 
-      const data = await response.json();
+      // Utiliser Supabase directement pour la suppression
+      const { error } = await supabase
+        .from('items')
+        .delete()
+        .eq('id', itemId)
+        .eq('user_id', session.user.id);
 
-      if (!data.ok) {
-        throw new Error(data.errors?.join(', ') || 'Failed to delete item');
+      if (error) {
+        console.error('❌ Erreur suppression:', error);
+        throw new Error(error.message);
       }
+
+      console.log('✅ Article supprimé avec succès');
 
       // Remove the item from the list
       setItems(prev => prev.filter(item => item.id !== itemId));
 
     } catch (err) {
+      console.error('❌ Erreur lors de la suppression:', err);
       setError(err instanceof Error ? err.message : 'Failed to delete item');
     }
   };
