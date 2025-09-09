@@ -22,11 +22,18 @@ export default function Home() {
     try {
       console.log(`🔄 Ajout de l'article: ${data.name}`);
 
-      // Rechercher une image sur Google Images
+      // Rechercher une image (local vs production)
       let imageUrl = null;
       try {
         console.log('📸 Recherche d\'image...');
-        const imageResponse = await fetch('http://localhost:3001/api/search-image', {
+        
+        // Choisir l'endpoint selon l'environnement
+        const isDev = import.meta.env.DEV;
+        const imageApiUrl = isDev 
+          ? 'http://localhost:3001/api/search-image'  // Serveur local en dev
+          : '/.netlify/functions/search-image';       // Fonction Netlify en prod
+        
+        const imageResponse = await fetch(imageApiUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -38,12 +45,12 @@ export default function Home() {
           const imageData = await imageResponse.json();
           if (imageData.success && imageData.imageUrl) {
             imageUrl = imageData.imageUrl;
-            console.log('✅ Image trouvée:', imageUrl);
+            console.log('✅ Image trouvée:', imageUrl, `(source: ${imageData.source || 'unknown'})`);
           } else {
             console.log('⚠️ Aucune image trouvée');
           }
         } else {
-          console.log('⚠️ Erreur lors de la recherche d\'image');
+          console.log('⚠️ Erreur lors de la recherche d\'image:', imageResponse.status);
         }
       } catch (imageError) {
         console.log('⚠️ Erreur image:', imageError);
