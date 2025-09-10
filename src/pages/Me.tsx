@@ -199,7 +199,7 @@ export default function Me() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 dark:border-white"></div>
       </div>
     );
   }
@@ -208,7 +208,7 @@ export default function Me() {
     <div className="max-w-6xl mx-auto space-y-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4 sm:mb-0">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-0">
           Ma Wishlist ({items.length})
         </h1>
       </div>
@@ -217,7 +217,7 @@ export default function Me() {
       <div className="card p-4">
         <div className="flex flex-wrap gap-4">
           <div className="flex-1 min-w-48">
-            <label htmlFor="domain-filter" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="domain-filter" className="block text-sm font-medium text-gray-700 dark:text-white mb-1">
               Filtrer par domaine
             </label>
             <select
@@ -236,7 +236,7 @@ export default function Me() {
           </div>
 
           <div className="flex-1 min-w-36">
-            <label htmlFor="sort-by" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="sort-by" className="block text-sm font-medium text-gray-700 dark:text-white mb-1">
               Trier par
             </label>
             <select
@@ -253,7 +253,7 @@ export default function Me() {
           </div>
 
           <div className="flex-1 min-w-32">
-            <label htmlFor="sort-order" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="sort-order" className="block text-sm font-medium text-gray-700 dark:text-white mb-1">
               Ordre
             </label>
             <select
@@ -271,7 +271,7 @@ export default function Me() {
 
       {/* Error message */}
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-md">
+        <div className="bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 px-4 py-3 rounded-md">
           <p>{error}</p>
         </div>
       )}
@@ -280,10 +280,10 @@ export default function Me() {
       {items.length === 0 ? (
         <div className="text-center py-12">
           <div className="text-6xl mb-4">🛒</div>
-          <h2 className="text-2xl font-semibold text-gray-900 mb-2">
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">
             Votre wishlist est vide
           </h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-600 dark:text-gray-300 mb-6">
             Commencez par ajouter des produits depuis la page d'accueil
           </p>
           <a
@@ -308,21 +308,21 @@ export default function Me() {
           </div>
           
           {/* Total section */}
-          <div className="mt-8 border-t pt-6">
-            <div className="flex justify-between items-center bg-gray-50 rounded-lg p-6">
+          <div className="mt-8 border-t dark:border-primary-700 pt-6">
+            <div className="flex justify-between items-center bg-gray-50 dark:bg-primary-800/50 rounded-lg p-6">
               <div>
-                <h3 className="text-lg font-semibold text-gray-900">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                   Total de votre wishlist
                 </h3>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-600 dark:text-gray-300">
                   {items.length} article{items.length > 1 ? 's' : ''} • Prix estimés uniquement
                 </p>
               </div>
               <div className="text-right">
-                <div className="text-2xl font-bold text-green-600">
+                <div className="text-2xl font-bold text-green-600 dark:text-green-400">
                   ~{calculateTotal(items).toFixed(2)} €
                 </div>
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                   Calcul approximatif
                 </p>
               </div>

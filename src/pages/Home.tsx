@@ -113,9 +113,9 @@ export default function Home() {
             <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary-600 via-secondary-500 to-tertiary-500 bg-clip-text text-transparent leading-tight">
               Wishlist Collector
             </h1>
-            <p className="text-xl md:text-2xl text-primary-700/80 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl text-primary-700 dark:text-white/90 max-w-3xl mx-auto leading-relaxed">
               Créez votre wishlist parfaite avec des visuels magnifiques
-              <span className="block text-lg mt-2 text-primary-600/60">
+              <span className="block text-lg mt-2 text-primary-600 dark:text-white/70">
                 🎯 Organisez vos envies • 🖼️ Images automatiques • 💝 Partagez vos coups de cœur
               </span>
             </p>
@@ -169,41 +169,41 @@ export default function Home() {
                 <h3 className="text-3xl font-bold bg-gradient-to-r from-primary-600 to-secondary-500 bg-clip-text text-transparent mb-4">
                   Comment ça marche ?
                 </h3>
-                <p className="text-primary-700/70 text-lg">Suivez ces étapes simples pour créer votre wishlist de rêve</p>
+                <p className="text-primary-700 dark:text-white/80 text-lg">Suivez ces étapes simples pour créer votre wishlist de rêve</p>
               </div>
               
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div className="glass-card p-6 hover:scale-105 transition-transform duration-300">
                   <div className="text-4xl mb-4 text-center">🎯</div>
-                  <h4 className="font-bold text-primary-700 mb-2 text-center">1. Saisissez</h4>
-                  <p className="text-primary-600/80 text-sm text-center">
+                  <h4 className="font-bold text-primary-700 dark:text-white mb-2 text-center">1. Saisissez</h4>
+                  <p className="text-primary-600 dark:text-white/70 text-sm text-center">
                     Entrez le nom du produit, son prix et l'URL de la page
                   </p>
                 </div>
                 
                 <div className="glass-card p-6 hover:scale-105 transition-transform duration-300">
                   <div className="text-4xl mb-4 text-center">🖼️</div>
-                  <h4 className="font-bold text-primary-700 mb-2 text-center">2. Image auto</h4>
-                  <p className="text-primary-600/80 text-sm text-center">
+                  <h4 className="font-bold text-primary-700 dark:text-white mb-2 text-center">2. Image auto</h4>
+                  <p className="text-primary-600 dark:text-white/70 text-sm text-center">
                     Une belle image est automatiquement trouvée sur Google Images
                   </p>
                 </div>
                 
                 <div className="glass-card p-6 hover:scale-105 transition-transform duration-300 md:col-span-2 lg:col-span-1">
                   <div className="text-4xl mb-4 text-center">💝</div>
-                  <h4 className="font-bold text-primary-700 mb-2 text-center">3. Profitez</h4>
-                  <p className="text-primary-600/80 text-sm text-center">
+                  <h4 className="font-bold text-primary-700 dark:text-white mb-2 text-center">3. Profitez</h4>
+                  <p className="text-primary-600 dark:text-white/70 text-sm text-center">
                     Retrouvez tous vos articles dans votre wishlist personnelle
                   </p>
                 </div>
               </div>
               
-              <div className="mt-8 glass bg-gradient-to-r from-primary-50/50 to-secondary-50/50 p-6 rounded-2xl">
+              <div className="mt-8 glass bg-gradient-to-r from-primary-50/50 to-secondary-50/50 dark:from-primary-800/30 dark:to-secondary-800/30 p-6 rounded-2xl">
                 <div className="flex items-start gap-4">
                   <div className="text-3xl">🚀</div>
                   <div>
-                    <h5 className="font-bold text-primary-700 mb-2">Nouvelle approche révolutionnaire</h5>
-                    <p className="text-primary-600/80 text-sm">
+                    <h5 className="font-bold text-primary-700 dark:text-white mb-2">Nouvelle approche révolutionnaire</h5>
+                    <p className="text-primary-600 dark:text-white/80 text-sm">
                       Fini les problèmes de scraping ! Vous renseignez les informations manuellement 
                       et nous nous occupons de trouver les plus belles images pour illustrer vos envies. 
                       Simple, rapide, et toujours fonctionnel !

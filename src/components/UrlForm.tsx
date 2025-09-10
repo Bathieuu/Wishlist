@@ -47,7 +47,7 @@ export default function UrlForm({ onSubmit, loading = false }: UrlFormProps) {
     <div className="card p-6">
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-white mb-2">
             Nom du produit *
           </label>
           <input
@@ -60,14 +60,14 @@ export default function UrlForm({ onSubmit, loading = false }: UrlFormProps) {
             disabled={loading}
           />
           {errors.name && (
-            <p className="mt-2 text-sm text-red-600" role="alert">
+            <p className="mt-2 text-sm text-red-600 dark:text-red-400" role="alert">
               {errors.name}
             </p>
           )}
         </div>
 
         <div>
-          <label htmlFor="price" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="price" className="block text-sm font-medium text-gray-700 dark:text-white mb-2">
             Prix (optionnel)
           </label>
           <input
@@ -82,7 +82,7 @@ export default function UrlForm({ onSubmit, loading = false }: UrlFormProps) {
         </div>
 
         <div>
-          <label htmlFor="url" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="url" className="block text-sm font-medium text-gray-700 dark:text-white mb-2">
             URL du produit *
           </label>
           <input
@@ -95,7 +95,7 @@ export default function UrlForm({ onSubmit, loading = false }: UrlFormProps) {
             disabled={loading}
           />
           {errors.url && (
-            <p className="mt-2 text-sm text-red-600" role="alert">
+            <p className="mt-2 text-sm text-red-600 dark:text-red-400" role="alert">
               {errors.url}
             </p>
           )}
