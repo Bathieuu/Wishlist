@@ -3,7 +3,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useState } from 'react';
 
 export default function Header() {
-  const { user, signOut, signInWithGoogle, signInWithApple } = useAuth();
+  const { user, signOut, signInWithGoogle } = useAuth();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleSignOut = async () => {
@@ -106,11 +106,8 @@ export default function Header() {
 
                         {/* Option Apple */}
                         <button
-                          onClick={() => {
-                            setIsDropdownOpen(false);
-                            signInWithApple();
-                          }}
-                          className="w-full px-4 py-3 text-left hover:bg-gray-50 flex items-center gap-3 transition-colors"
+                          disabled
+                          className="w-full px-4 py-3 text-left opacity-50 cursor-not-allowed flex items-center gap-3"
                         >
                           <div className="w-6 h-6 flex items-center justify-center">
                             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#000000">
@@ -119,7 +116,7 @@ export default function Header() {
                           </div>
                           <div>
                             <div className="font-medium text-gray-900 text-sm">Apple</div>
-                            <div className="text-xs text-gray-500">Sign In with Apple</div>
+                            <div className="text-xs text-gray-500">En attente de validation</div>
                           </div>
                         </button>
                       </div>

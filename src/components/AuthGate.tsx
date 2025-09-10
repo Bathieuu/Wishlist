@@ -6,7 +6,7 @@ interface AuthGateProps {
 }
 
 export default function AuthGate({ children }: AuthGateProps) {
-  const { user, signInWithGoogle, signInWithApple } = useAuth();
+  const { user, signInWithGoogle } = useAuth();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   if (!user) {
@@ -71,11 +71,8 @@ export default function AuthGate({ children }: AuthGateProps) {
 
                   {/* Option Apple */}
                   <button
-                    onClick={() => {
-                      setIsDropdownOpen(false);
-                      signInWithApple();
-                    }}
-                    className="w-full px-4 py-3 text-left hover:bg-gray-50 flex items-center gap-3 transition-colors"
+                    disabled
+                    className="w-full px-4 py-3 text-left opacity-50 cursor-not-allowed flex items-center gap-3"
                   >
                     <div className="w-8 h-8 flex items-center justify-center">
                       <svg className="w-5 h-5" viewBox="0 0 24 24" fill="#000000">
@@ -84,7 +81,7 @@ export default function AuthGate({ children }: AuthGateProps) {
                     </div>
                     <div>
                       <div className="font-medium text-gray-900">Apple</div>
-                      <div className="text-sm text-gray-500">Se connecter avec Apple</div>
+                      <div className="text-sm text-gray-500">En attente de validation</div>
                     </div>
                   </button>
 
