@@ -15,7 +15,7 @@ export default function Header() {
   };
 
   return (
-    <header className="header-glass sticky top-0 z-50">
+    <header className="header-glass sticky top-0 z-[100]">
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-20">
           <Link 
@@ -79,7 +79,7 @@ export default function Header() {
 
                   {/* Menu dropdown */}
                   {isDropdownOpen && (
-                    <div className="glass rounded-xl w-64 overflow-hidden animate-in">
+                    <div className="absolute top-full right-0 mt-2 glass rounded-xl w-64 overflow-hidden animate-in z-[60] shadow-2xl">
                       <div className="py-2">
                         {/* Option Google */}
                         <button
@@ -128,7 +128,7 @@ export default function Header() {
                   {/* Fermer le dropdown si on clique à l'extérieur */}
                   {isDropdownOpen && (
                     <div 
-                      className="fixed inset-0 z-40" 
+                      className="fixed inset-0 z-[55]" 
                       onClick={() => setIsDropdownOpen(false)}
                     />
                   )}
