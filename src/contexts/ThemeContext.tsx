@@ -15,9 +15,9 @@ interface ThemeProviderProps {
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(() => {
-    // Récupérer le thème sauvegardé ou utiliser 'light' par défaut
+    // Récupérer le thème sauvegardé ou utiliser 'dark' par défaut (mode vert)
     const saved = localStorage.getItem('wishlist-theme');
-    return (saved as Theme) || 'light';
+    return (saved as Theme) || 'dark';
   });
 
   useEffect(() => {

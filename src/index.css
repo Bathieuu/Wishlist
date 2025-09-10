@@ -18,10 +18,10 @@
     overflow-x: hidden;
   }
 
-  /* Mode sombre - inversion vert/blanc */
+  /* Mode sombre - fond vert avec écriture blanche */
   .dark body {
     @apply text-white;
-    background: linear-gradient(-45deg, #ffffff, #f0f9ff, #f48067, #fbe6a0);
+    background: linear-gradient(-45deg, #0a1e1b, #112f2c, #1a4c47, #0d2520);
     background-size: 400% 400%;
     animation: gradient 15s ease infinite;
   }
@@ -41,12 +41,12 @@
     z-index: -1;
   }
 
-  /* Mode sombre - effets inversés */
+  /* Mode sombre - effets avec fond vert */
   .dark body::before {
     background: 
-      radial-gradient(circle at 25% 25%, rgba(244, 128, 103, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 75% 75%, rgba(251, 230, 160, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+      radial-gradient(circle at 25% 25%, rgba(244, 128, 103, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(251, 230, 160, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(17, 47, 44, 0.2) 0%, transparent 50%);
   }
 }
 
@@ -57,7 +57,7 @@
   }
 
   .dark .glass {
-    @apply backdrop-blur-xl bg-primary-900/20 border border-primary-800/30 shadow-2xl;
+    @apply backdrop-blur-xl bg-primary-800/30 border border-primary-600/40 shadow-2xl;
   }
 
   .glass-dark {
@@ -65,7 +65,7 @@
   }
 
   .dark .glass-dark {
-    @apply backdrop-blur-xl bg-white/20 border border-primary-200/20 shadow-2xl;
+    @apply backdrop-blur-xl bg-primary-800/40 border border-primary-600/50 shadow-2xl;
   }
 
   .glass-card {
@@ -77,11 +77,11 @@
   }
 
   .dark .glass-card {
-    @apply backdrop-blur-lg bg-primary-900/80 border border-primary-700/30 shadow-xl rounded-2xl;
+    @apply backdrop-blur-lg bg-primary-800/70 border border-primary-600/40 shadow-xl rounded-2xl text-white;
     box-shadow: 
-      0 8px 32px rgba(255, 255, 255, 0.1),
-      0 4px 16px rgba(244, 128, 103, 0.1),
-      inset 0 1px 0 rgba(17, 47, 44, 0.3);
+      0 8px 32px rgba(17, 47, 44, 0.3),
+      0 4px 16px rgba(244, 128, 103, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
 
   .glass-button {
@@ -92,10 +92,11 @@
   }
 
   .dark .glass-button {
-    @apply backdrop-blur-lg bg-white/90 border border-white/30 shadow-lg;
+    @apply backdrop-blur-lg bg-primary-700/80 border border-primary-500/50 shadow-lg text-white;
     box-shadow: 
-      0 4px 16px rgba(255, 255, 255, 0.2),
-      inset 0 1px 0 rgba(17, 47, 44, 0.2);
+      0 4px 16px rgba(17, 47, 44, 0.4),
+      0 2px 8px rgba(244, 128, 103, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
 
   .glass-button:hover {
@@ -107,11 +108,11 @@
   }
 
   .dark .glass-button:hover {
-    @apply bg-white/95 scale-105 shadow-xl;
+    @apply bg-primary-600/90 scale-105 shadow-xl text-white;
     box-shadow: 
-      0 8px 32px rgba(255, 255, 255, 0.3),
-      0 0 20px rgba(244, 128, 103, 0.3),
-      inset 0 1px 0 rgba(17, 47, 44, 0.3);
+      0 8px 32px rgba(17, 47, 44, 0.5),
+      0 4px 16px rgba(244, 128, 103, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
   }
 
   /* Updated button styles */
@@ -126,7 +127,7 @@
   }
 
   .dark .btn-primary {
-    @apply text-primary-700;
+    @apply text-white;
   }
   
   .btn-secondary {
@@ -134,7 +135,7 @@
   }
 
   .dark .btn-secondary {
-    @apply backdrop-blur-lg bg-primary-900/70 text-white hover:bg-primary-900/80 border border-primary-700/30;
+    @apply backdrop-blur-lg bg-primary-800/70 text-white hover:bg-primary-700/80 border border-primary-600/40;
   }
   
   .btn-danger {
@@ -150,6 +151,10 @@
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
+  .dark .input {
+    @apply border-primary-600/40 bg-primary-800/70 text-white placeholder:text-gray-300;
+  }
+
   .input:focus {
     @apply bg-white/80 scale-102 shadow-xl;
     box-shadow: 
@@ -158,10 +163,23 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.4);
   }
 
+  .dark .input:focus {
+    @apply bg-primary-700/80 scale-102 shadow-xl;
+    box-shadow: 
+      0 8px 32px rgba(17, 47, 44, 0.3),
+      0 0 20px rgba(244, 128, 103, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
   /* Header glass effect */
   .header-glass {
     @apply backdrop-blur-xl bg-white/80 border-b border-white/20 shadow-lg;
     box-shadow: 0 4px 16px rgba(17, 47, 44, 0.1);
+  }
+
+  .dark .header-glass {
+    @apply backdrop-blur-xl bg-primary-800/80 border-b border-primary-600/40 shadow-lg;
+    box-shadow: 0 4px 16px rgba(17, 47, 44, 0.3);
   }
 
   /* Floating elements */
