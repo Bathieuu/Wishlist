@@ -15,44 +15,46 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+    <header className="header-glass sticky top-0 z-50">
+      <div className="container mx-auto px-6">
+        <div className="flex items-center justify-between h-20">
           <Link 
             to="/" 
-            className="text-xl font-bold text-gray-900 hover:text-primary-600 transition-colors"
+            className="text-2xl font-bold bg-gradient-to-r from-primary-600 to-secondary-500 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300 glow-text"
           >
-            🔗 Wishlist Collector
+            ✨ Wishlist Collector
           </Link>
           
-          <nav className="flex items-center space-x-4">
+          <nav className="flex items-center space-x-6">
             <Link 
               to="/" 
-              className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500"
+              className="text-primary-700 hover:text-secondary-500 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:scale-105 hover:backdrop-blur-lg hover:bg-white/30"
             >
-              Accueil
+              🏠 Accueil
             </Link>
             
             {user && (
               <Link 
                 to="/me" 
-                className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className="text-primary-700 hover:text-secondary-500 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:scale-105 hover:backdrop-blur-lg hover:bg-white/30"
               >
-                Ma Wishlist
+                💝 Ma Wishlist
               </Link>
             )}
             
-            <div className="border-l border-gray-300 pl-4">
+            <div className="border-l border-white/30 pl-6">
               {user ? (
-                <div className="flex items-center space-x-3">
-                  <span className="text-sm text-gray-600">
-                    {user.email}
-                  </span>
+                <div className="flex items-center space-x-4">
+                  <div className="glass px-3 py-2 rounded-lg">
+                    <span className="text-sm text-primary-700 font-medium">
+                      👋 {user.email}
+                    </span>
+                  </div>
                   <button
                     onClick={handleSignOut}
-                    className="btn btn-secondary px-3 py-1.5 text-sm"
+                    className="btn btn-secondary px-4 py-2 text-sm"
                   >
-                    Déconnexion
+                    🚪 Déconnexion
                   </button>
                 </div>
               ) : (
@@ -77,7 +79,7 @@ export default function Header() {
 
                   {/* Menu dropdown */}
                   {isDropdownOpen && (
-                    <div className="absolute top-full right-0 mt-2 w-64 bg-white border border-gray-200 rounded-xl shadow-2xl z-50 overflow-hidden animate-in">
+                    <div className="glass rounded-xl w-64 overflow-hidden animate-in">
                       <div className="py-2">
                         {/* Option Google */}
                         <button
@@ -85,7 +87,7 @@ export default function Header() {
                             setIsDropdownOpen(false);
                             signInWithGoogle();
                           }}
-                          className="w-full px-4 py-3 text-left hover:bg-gray-50 flex items-center gap-3 transition-colors"
+                          className="w-full px-4 py-3 text-left hover:bg-white/20 hover:backdrop-blur-lg flex items-center gap-3 transition-all duration-300"
                         >
                           <div className="w-6 h-6 flex items-center justify-center">
                             <svg className="w-4 h-4" viewBox="0 0 24 24">
@@ -96,13 +98,13 @@ export default function Header() {
                             </svg>
                           </div>
                           <div>
-                            <div className="font-medium text-gray-900 text-sm">Google</div>
-                            <div className="text-xs text-gray-500">Connexion rapide</div>
+                            <div className="font-medium text-primary-700 text-sm">Google</div>
+                            <div className="text-xs text-primary-500">Connexion rapide</div>
                           </div>
                         </button>
 
                         {/* Séparateur */}
-                        <div className="border-t border-gray-100 my-1"></div>
+                        <div className="border-t border-white/20 my-1 mx-2"></div>
 
                         {/* Option Apple */}
                         <button
@@ -115,8 +117,8 @@ export default function Header() {
                             </svg>
                           </div>
                           <div>
-                            <div className="font-medium text-gray-900 text-sm">Apple</div>
-                            <div className="text-xs text-gray-500">En attente de validation</div>
+                            <div className="font-medium text-primary-700 text-sm">Apple</div>
+                            <div className="text-xs text-primary-500">En attente de validation</div>
                           </div>
                         </button>
                       </div>
